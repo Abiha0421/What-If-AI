@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>What if AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">What if AI</h1>
+    <button onclick="openKali()">Open Kali Linux</button>
+    <pre id="output"></pre>
+  </div>
+
+  <script>
+    async function openKali() {
+      document.getElementById("output").style.display = "block";
+      document.getElementById("output").textContent = "⚙️ Booting Kali Linux VM...";
+
+      const response = await fetch("http://127.0.0.1:5000/simulate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ feature: "kali" })
+      });
+
+      const data = await response.json();
+      document.getElementById("output").textContent = data.output;
+    }
+  </script>
+</body>
+</html>
+
